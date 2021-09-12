@@ -16,6 +16,6 @@ var songGone = function(event){
 }
 
 var songSearch = function(recentSearch) {
-    
+    var songApiUrl = "https://api.mixcloud.com/search/?=" + recentSearch & type
 }
 clearSongEl.addEventListener("click", songGone)
