@@ -9,7 +9,6 @@ var inputHandler = function(event) {
     var inputVal = inputEl.value.trim();
 
     if (inputVal) {
-		//console.log(inputVal);
         api(inputVal);
         inputEl.value = "";
         
@@ -19,10 +18,10 @@ var inputHandler = function(event) {
 };
 
 var api = function(val) {
-	fetch("https://shazam.p.rapidapi.com/search?term=" + val, {
+	fetch("https://unsa-unofficial-spotify-api.p.rapidapi.com/search?query=" + val + "&type=playlists", {
 		"method": "GET",
 		"headers": {
-			"x-rapidapi-host": "shazam.p.rapidapi.com",
+			"x-rapidapi-host": "unsa-unofficial-spotify-api.p.rapidapi.com",
 			"x-rapidapi-key": "2eba6a7cffmsh74d3bc58b3229c1p11d82fjsn2bc3b902cbfc"
 		}
 	})
@@ -32,11 +31,10 @@ var api = function(val) {
     		response.json().then(function(data) {
 				console.log(data);
 				if (!jQuery.isEmptyObject(data)) {
-					//if result list already exists, remove it
 					if (document.querySelector("#resList")) {
-					document.querySelector("#resList").remove();
-					}
-					displayRes(data);
+						document.querySelector("#resList").remove();
+						}
+						displayRes(data);
 				} else {
 					alert("song not found");
 				}
@@ -48,18 +46,15 @@ var api = function(val) {
 };
 
 var displayRes = function(data) {
-	//console.log(data.artists.hits.length);
-	//console.log(data.tracks.hits.length);
 	var list = document.createElement("div");
-	list.setAttribute("id", "resList");
     resultsEl.append(list);
 
-	for (var i = 0; i < data.tracks.hits.length; i++) {
+	for (var i = 0; i < data.Results.length; i++) {
 		var resItem = document.createElement("a");
 
-		resItem.innerHTML = data.tracks.hits[i].track.share.subject;
+		resItem.innerHTML = data.Results[i].name;
     	resItem.className = "res";
-    	resItem.setAttribute("href", data.tracks.hits[i].track.url);
+    	resItem.setAttribute("href", data.Results[i].external_urls.spotify);
     	resItem.setAttribute("target", "_blank");
 		
 		list.append(resItem);
