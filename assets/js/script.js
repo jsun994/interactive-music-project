@@ -20,20 +20,20 @@ var inputHandler = function(event) {
 
 //api
 var api = function(val) {
-	fetch("https://unsa-unofficial-spotify-api.p.rapidapi.com/search?query=" + val + "&type=tracks", {
+	fetch("https://deezerdevs-deezer.p.rapidapi.com/search?q=" + val, {
 		"method": "GET",
 		"headers": {
-			"x-rapidapi-host": "unsa-unofficial-spotify-api.p.rapidapi.com",
+			"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
 			"x-rapidapi-key": "2eba6a7cffmsh74d3bc58b3229c1p11d82fjsn2bc3b902cbfc"
 		}
 	})
 	.then(function(response) {
 		//console.log(response);
 		if (response.ok) {
-    		response.json().then(function(data) {
-				console.log(data);
-
-				if (data.Results != "No results Found") {
+    		response.json().then(function(apiData) {
+				console.log(apiData);
+			
+				if (apiData.length != 0) {
 					if (document.querySelector("#resList")) {
 						document.querySelector("#resList").remove();
 					}
@@ -42,7 +42,7 @@ var api = function(val) {
 					}
 					save(val);
 					load();
-					displayRes(data);
+					displayRes(apiData);
 				} else {modalEl.classList.add("is-active");}
 			})
 		} else {modalEl.classList.add("is-active");}
@@ -50,17 +50,17 @@ var api = function(val) {
 };
 
 //display
-var displayRes = function(data) {
+var displayRes = function(apiData) {
 	
 	var list = document.createElement("div");
 	list.setAttribute("id", "resList");
     resultsEl.append(list);
 
-	for (var i = 0; i < data.Results.length; i++) {
+	for (var i = 0; i < apiData.data.length; i++) {
 		var resItem = document.createElement("a");
-		resItem.innerHTML = data.Results[i].name;
+		resItem.innerHTML = apiData.data[i].title;
     	resItem.className = "res";
-    	resItem.setAttribute("href", data.Results[i].preview_url);
+    	resItem.setAttribute("href", apiData.data[i].preview);
     	resItem.setAttribute("target", "_blank");
 		list.append(resItem);
 	}
