@@ -4,6 +4,7 @@ var resultsEl = document.querySelector("#results");
 var modalEl = document.querySelector("#modal");
 var closeEl = document.querySelector("#close");
 var clearEl = document.querySelector("#clear");
+
 var storageEl = [];
 
 //handle input
@@ -91,10 +92,10 @@ var save = function(song) {
 //load function
 var load = function() {
     storageEl = JSON.parse(localStorage.getItem("songs")) || [];
-    var recent = document.querySelector("#recent");
+    var recentEl = document.querySelector("#recent");
     var reList = document.createElement("div");
     reList.setAttribute("id", "reList");
-    recent.append(reList);
+    recentEl.append(reList);
 
     //loop
     for (var i = 0; i < storageEl.length; i++) {
