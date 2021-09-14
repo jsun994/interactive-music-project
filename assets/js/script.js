@@ -1,19 +1,19 @@
 var userFormEl = document.querySelector("#form");
 var inputEl = document.querySelector("#input");
 var resultsEl = document.querySelector("#results");
+var modalEl = document.querySelector("#modal");
+var closeEl = document.querySelector("#close");
 
 //handle input
 var inputHandler = function(event) {
     event.preventDefault();
-
     var inputVal = inputEl.value.trim();
-
     if (inputVal) {
         api(inputVal);
         inputEl.value = "";
         
     } else {
-        alert("not valid!");
+		modalEl.classList.add("is-active");
     }
 };
 
@@ -30,28 +30,30 @@ var api = function(val) {
 		if (response.ok) {
     		response.json().then(function(data) {
 				console.log(data);
-				if (!jQuery.isEmptyObject(data)) {
+
+				if (data.Results != "No results Found") {
 					if (document.querySelector("#resList")) {
 						document.querySelector("#resList").remove();
-						}
-						displayRes(data);
+					}
+					displayRes(data);
 				} else {
-					alert("song not found");
+					modalEl.classList.add("is-active");
 				}
 			})
 		} else {
-			alert("Error: " + response.statusText);
+			modalEl.classList.add("is-active");
 		}
 	})
 };
 
 var displayRes = function(data) {
+	
 	var list = document.createElement("div");
+	list.setAttribute("id", "resList");
     resultsEl.append(list);
 
 	for (var i = 0; i < data.Results.length; i++) {
 		var resItem = document.createElement("a");
-
 		resItem.innerHTML = data.Results[i].name;
     	resItem.className = "res";
     	resItem.setAttribute("href", data.Results[i].external_urls.spotify);
@@ -61,4 +63,13 @@ var displayRes = function(data) {
 	}
 };
 
+var modalHandler = function(event) {
+	modalEl.classList.remove("is-active");
+	
+	if (document.querySelector("#resList")) {
+		document.querySelector("#resList").remove();
+	}
+}
+
 userFormEl.addEventListener("submit", inputHandler);
+closeEl.addEventListener("click", modalHandler);
