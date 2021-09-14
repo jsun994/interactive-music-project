@@ -12,11 +12,10 @@ var inputHandler = function(event) {
         api(inputVal);
         inputEl.value = "";
         
-    } else {
-		modalEl.classList.add("is-active");
-    }
+    } else {modalEl.classList.add("is-active");}
 };
 
+//api
 var api = function(val) {
 	fetch("https://unsa-unofficial-spotify-api.p.rapidapi.com/search?query=" + val + "&type=playlists", {
 		"method": "GET",
@@ -36,16 +35,13 @@ var api = function(val) {
 						document.querySelector("#resList").remove();
 					}
 					displayRes(data);
-				} else {
-					modalEl.classList.add("is-active");
-				}
+				} else {modalEl.classList.add("is-active");}
 			})
-		} else {
-			modalEl.classList.add("is-active");
-		}
+		} else {modalEl.classList.add("is-active");}
 	})
 };
 
+//display
 var displayRes = function(data) {
 	
 	var list = document.createElement("div");
@@ -58,11 +54,11 @@ var displayRes = function(data) {
     	resItem.className = "res";
     	resItem.setAttribute("href", data.Results[i].external_urls.spotify);
     	resItem.setAttribute("target", "_blank");
-		
 		list.append(resItem);
 	}
 };
 
+//modal
 var modalHandler = function(event) {
 	modalEl.classList.remove("is-active");
 	if (document.querySelector("#resList")) {
