@@ -17,7 +17,7 @@ var inputHandler = function(event) {
 
 //api
 var api = function(val) {
-	fetch("https://unsa-unofficial-spotify-api.p.rapidapi.com/search?query=" + val + "&type=playlists", {
+	fetch("https://unsa-unofficial-spotify-api.p.rapidapi.com/search?query=" + val + "&type=tracks", {
 		"method": "GET",
 		"headers": {
 			"x-rapidapi-host": "unsa-unofficial-spotify-api.p.rapidapi.com",
@@ -52,7 +52,7 @@ var displayRes = function(data) {
 		var resItem = document.createElement("a");
 		resItem.innerHTML = data.Results[i].name;
     	resItem.className = "res";
-    	resItem.setAttribute("href", data.Results[i].external_urls.spotify);
+    	resItem.setAttribute("href", data.Results[i].preview_url);
     	resItem.setAttribute("target", "_blank");
 		list.append(resItem);
 	}
