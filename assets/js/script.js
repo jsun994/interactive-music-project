@@ -65,7 +65,6 @@ var displayRes = function(data) {
 
 var modalHandler = function(event) {
 	modalEl.classList.remove("is-active");
-	
 	if (document.querySelector("#resList")) {
 		document.querySelector("#resList").remove();
 	}
