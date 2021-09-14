@@ -33,7 +33,7 @@ var api = function(val) {
     		response.json().then(function(apiData) {
 				console.log(apiData);
 			
-				if (apiData.length != 0) {
+				if (apiData.data.length != 0) {
 					if (document.querySelector("#resList")) {
 						document.querySelector("#resList").remove();
 					}
