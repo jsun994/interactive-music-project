@@ -58,7 +58,7 @@ var displayRes = function(apiData) {
 
 	for (var i = 0; i < apiData.data.length; i++) {
 		var resItem = document.createElement("a");
-		resItem.innerHTML = apiData.data[i].title;
+		resItem.innerHTML = apiData.data[i].title + " - " + apiData.data[i].album.title + " - " + apiData.data[i].artist.name;
     	resItem.className = "res";
     	resItem.setAttribute("href", apiData.data[i].preview);
     	resItem.setAttribute("target", "_blank");
