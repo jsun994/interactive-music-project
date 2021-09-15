@@ -1,4 +1,4 @@
-# Music Previwer
+# Music Previewer
 
 ## Overview:
 
@@ -12,6 +12,6 @@ The user is able to enter an artist, group name, album, song title, or genre int
 
 ## Live Application:
 
-< link here >
+https://k-owell.github.io/Project-HotTopic/
 
 < screenshot of functioning page >
