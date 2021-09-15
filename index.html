@@ -23,18 +23,22 @@
     />
     <link rel="stylesheet" href="./assets/css/style.css"/>
 
-    <title>Music Randomizer</title>
+    <title>Music Previewer</title>
 </head>
 
 <body>
 
 <header>
     <h1 class="is-size-1 has-background-dark has-text-light has-text-centered px-2 py-2">
-        Music Randomizer <i class="fas fa-music"></i>
+        Music Previewer <i class="fas fa-music"></i>
     </h1>
 </header>
 
 <main>
+    <h3 id="highscore-tab">
+        <a href="Top-Ten.html">View Artist Top Hits</a>
+    </h3>
+    
 <!--input and recent searches col-->
 <div class="section">
     <div class="columns">
@@ -42,26 +46,26 @@
                 
             <label class="label">Preference</label>
             
-            <div class="field is-grouped">
+            <form class="field is-grouped" id="form">
                 <p class="control is-expanded">
-                    <input class="input" type="text" placeholder="e.g">
+                    <input class="input" type="text" placeholder="e.g" id="input">
                 </p>
                         
                 <p class="control">
-                    <a class="button is-info" id="searchnow">
+                    <button class="button is-info" type="submit">
                         Search
-                    </a>
+                    </button>
                 </p>
-            </div>
+            </form>
 
             <label class="label">Recent Searches</label>
             <div class="card">
-                <div class="card-content">
-                    placeholder
+                <div class="card-content" id="recent">
+                    
                 </div>
                 <footer class="card-footer">
                 <p class="card-footer-item">
-                    <button class="button is-danger is-fullwidth" id="all-clear">
+                    <button class="button is-danger is-fullwidth" id="clear">
                         Clear All
                     </button>
                 </p>
@@ -72,8 +76,8 @@
         <div class="column is-8">
             <label class="label is-size-4 has-text-centered">Results</label>
             <div class="card">
-                <div class="card-content">
-                    info
+                <div class="card-content" id="results">
+                    
                 </div>
             </div>
         </div>
@@ -82,14 +86,14 @@
 </div>
 
 <!--modal-->
-<div class="modal">
+<div class="modal" id="modal">
     <div class="modal-background"></div>
     <div class="modal-card">
         <header class="modal-card-head">
-            <button class="delete" aria-label="close"></button>
+            <button class="delete" aria-label="close" id="close"></button>
         </header>
         <section class="modal-card-body">
-        placeholder
+        invalid, try again
         </section>
     <footer class="modal-card-foot"></footer>
     </div>
@@ -102,6 +106,5 @@
 <script src="./assets/js/script.js"></script>
 
 </body>
-
 
 </html>
