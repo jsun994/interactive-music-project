@@ -30,7 +30,7 @@ var api = function(val) {
     		response.json().then(function(apiData) {
 				console.log(apiData);
 			
-				if (apiData.data.length != 0) {
+				if (apiData.data.length!= 0) {
 					if (document.querySelector("#resList")) {
 						document.querySelector("#resList").remove();
 					}
@@ -44,6 +44,21 @@ var api = function(val) {
 			})
 		} else {modalEl.classList.add("is-active");}
 	})
+};
+var displayRes = function(apiData) {
+	
+	var list = document.createElement("div");
+	list.setAttribute("id", "resList");
+    resultsEl.append(list);
+
+	for (var i = 0; i < apiData.data.length; i++) {
+		var resItem = document.createElement("a");
+		resItem.innerHTML = apiData.data[i].title + " - " + apiData.data[i].album.title + " - " + apiData.data[i].artist.name;
+    	resItem.className = "res";
+    	resItem.setAttribute("href", apiData.data[i].preview);
+    	resItem.setAttribute("target", "_blank");
+		list.append(resItem);
+	}
 };
 clearSongEl.addEventListener("click", songGone)
 searchNowEl.addEventListener("click", api)
