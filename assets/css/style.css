@@ -1,0 +1,8 @@
+.res {
+    display: flex;
+}
+
+#reList {
+    display: flex;
+    flex-direction: column;
+}
