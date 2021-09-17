@@ -20,20 +20,20 @@ var inputHandler = function(event) {
 
 //api
 var api = function(val) {
-	fetch("https://deezerdevs-deezer.p.rapidapi.com/search?q=" + val, {
-		"method": "GET",
-		"headers": {
-			"x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
-			"x-rapidapi-key": "2eba6a7cffmsh74d3bc58b3229c1p11d82fjsn2bc3b902cbfc"
-		}
-	})
+	fetch("https://genius.p.rapidapi.com/search?q=" + val, {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "genius.p.rapidapi.com",
+		"x-rapidapi-key": "b0955a5cf0msh85a6f596e0511d6p1965f0jsn260a9f2c67e0"
+	}
+})
 	.then(function(response) {
 		//console.log(response);
 		if (response.ok) {
-    		response.json().then(function(apiData) {
+    	    response.json().then(function(apiData) {
 				console.log(apiData);
-			
-				if (apiData.data.length != 0) {
+			    console.log(apiData.response);
+				if (apiData.response.hits.length != 0) {
 					if (document.querySelector("#resList")) {
 						document.querySelector("#resList").remove();
 					}
@@ -56,12 +56,13 @@ var displayRes = function(apiData) {
 	list.setAttribute("id", "resList");
     resultsEl.append(list);
 
-	for (var i = 0; i < apiData.data.length; i++) {
+	for (var i = 0; i < apiData.response.hits.length; i++) {
 		var resItem = document.createElement("a");
-		resItem.innerHTML = apiData.data[i].title + " - " + apiData.data[i].album.title + " - " + apiData.data[i].artist.name;
-    	resItem.className = "res";
-    	resItem.setAttribute("href", apiData.data[i].preview);
-    	resItem.setAttribute("target", "_blank");
+        console.log(apiData.response.hits[i])
+		resItem.innerHTML = apiData.response.hits[i].result.title 
+    resItem.className = "res";
+    resItem.setAttribute("href", apiData.response.hits[i].result.url);
+    resItem.setAttribute("target", "_blank");
 		list.append(resItem);
 	}
 };
@@ -127,3 +128,5 @@ load();
 userFormEl.addEventListener("submit", inputHandler);
 closeEl.addEventListener("click", modalHandler);
 clearEl.addEventListener("click", clear);
+
+
